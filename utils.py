@@ -1,9 +1,23 @@
-import dictionary
+import re
+from fuzzy import DMetaphone 
+from fuzzywuzzy.fuzz import ratio as _ratio
 
-words = open('british/brit-a-z.txt','r').readlines()
+FILES = ['british/brit-a-z.txt', 'british/britcaps.txt']
 
-words = map(lambda word: word.strip('\r\n'), words)
+def normalize_words(sentence):
+    words = re.findall(r'[a-z]+', sentence, re.IGNORECASE)
+    return map(lambda word: word.lower(),words)
 
-dictionary.add_words(words)
 
-print "All the words added to the dictionary"
+def get_words_from_file(source_file):
+    return open(source_file,'r').readlines()
+
+def ratio(_str1,_str2):
+    return _ratio(_str1,_str2)
+
+def dump_dmeta(words):
+    dmeta = DMetaphone()
+    return filter(lambda word: word is not None,
+            chain(*(map(dmeta, words))))
+
+

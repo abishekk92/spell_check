@@ -10,6 +10,10 @@ class Streamer(TwythonStreamer):
             words = utils.normalize_words(tweet) 
             incorrect = dictionary.check_spelling(words)
             ##TODO: Use soundex indexes to figure out if a new word is likely to be English
+            if incorrect is not None:
+                for word in incorrect:
+                    if is_it_english(word):
+                        dictionary.add_words([words])
 
     def on_error(self,status_code,data):
         print status_code
