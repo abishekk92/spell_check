@@ -7,7 +7,7 @@ from collections import Counter
 FILES = ['british/brit-a-z.txt', 'british/britcaps.txt']
 
 def normalize_words(sentence):
-    words = re.findall(r'\w+', sentence, re.IGNORECASE)
+    words = re.findall(r'[a-z]+', sentence, re.IGNORECASE)
     return map(lambda word: word.lower(),words)
 
 def user(word):
@@ -20,12 +20,12 @@ def url(word):
     return word.startswith("http://") or word.startswith("https://")
 
 def rt(word):
-    return word == "rt"
+    return word.lower() == "rt"
 
 def noise(word):
     word = str(word)
     return url(word) or hashtag(word) or \
-           user(word) or rt(word)
+           user(word) or rt(word) 
 
 def extract_noise(tweet):
     words = tweet.split() 

@@ -18,5 +18,6 @@ def get_centroids():
 
 def error_counts(words):
     for word in words:
-        redis.zincrby("error_count", str(word), 1)
-        print word
+        if len(word) > 2 :
+            redis.zincrby("error_count", str(word), 1)
+            print word
