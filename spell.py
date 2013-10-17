@@ -1,6 +1,7 @@
 from twython import TwythonStreamer
 from os import getenv as ENV
 from utils import *
+from redis_wrapper import *
 import dictionary
 class Streamer(TwythonStreamer):
 
@@ -10,10 +11,10 @@ class Streamer(TwythonStreamer):
             words = normalize_words(tweet) 
             incorrect = dictionary.check_spelling(words)
             if incorrect is not None:
+                error_counts(incorrect)
                 for word,dmeta in zip(incorrect,dump_dmeta(incorrect)):
-                    if is_it_english(word):
-                        dictionary.add_words([words])
-                    print word,dictionary.confidence_score(dmeta)
+                    score,closest = dictionary.confidence_score(word, dmeta)
+                    print word,score,closest
 
     def on_error(self,status_code,data):
         print "Error:%s" % status_code

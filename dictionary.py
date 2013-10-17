@@ -1,6 +1,6 @@
 from pyreBloom import pyreBloom as bloom_filter
 from utils import *
-from redis_wrapper import get_centroids
+from redis_wrapper import *
 dictionary = bloom_filter('dictionary',10000000,0.01)
 
 
@@ -15,5 +15,7 @@ def check_spelling(words):
     else:
         return incorrect
 
-def confidence_score(word):
-    return find_closest(word, get_centroids())
+def confidence_score(word,dmeta):
+    score = get_score("error_count",word)/set_cardinality("error_count")
+    closest = find_closest(dmeta, get_centroids())
+    return score, closest
