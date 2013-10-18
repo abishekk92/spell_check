@@ -24,7 +24,16 @@ def get_centroids():
 
 def error_counts(words):
     for word in words:
-        if len(word) > 2 :
-            redis.zincrby("error_count", str(word), 1)
-            #print word
+        redis.zincrby("error_count", str(word), 1)
 
+def add_incorrect(word):
+    redis.zincrby("incorrect", str(word), 1)
+
+def add_new(word):
+    redis.zadd("new", str(word),0)
+
+def remove_from_incorrect(word):
+    redis.zrem("incorrect", word)
+
+def common_mistake():
+    return redis.zrange("incorrect",-1,-1)

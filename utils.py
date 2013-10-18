@@ -5,7 +5,7 @@ from itertools import chain
 from collections import Counter
 
 FILES = ['british/brit-a-z.txt', 'british/britcaps.txt']
-
+boost_point = 0.69
 def normalize_words(sentence):
     words = re.findall(r'[a-z]+', sentence, re.IGNORECASE)
     return map(lambda word: word.lower(),words)

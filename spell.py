@@ -13,8 +13,16 @@ class Streamer(TwythonStreamer):
             if incorrect is not None:
                 error_counts(incorrect)
                 for word,dmeta in zip(incorrect,dump_dmeta(incorrect)):
-                    score,closest = dictionary.confidence_score(word, dmeta)
-                    print word,score,closest
+                    score,closest = dictionary.confidence_score(word,dmeta)
+                    if score > boost_point:
+                        remove_from_incorrect(word)
+                        dictionary.add_word(word)
+                        add_new(word)
+                        print "Number of new words found: %s" % set_cardinality("new")
+                    else:
+                        add_incorrect(word)
+                        print "Number of incorrect words: %s %s" %(set_cardinality("incorrect"),
+                                                                   common_mistake()[0])
 
     def on_error(self,status_code,data):
         print "Error:%s" % status_code
