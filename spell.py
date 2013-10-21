@@ -18,12 +18,11 @@ class Streamer(TwythonStreamer):
                         remove_from_incorrect(word)
                         dictionary.add_word(word)
                         add_new(word)
-                        print "Number of new words found: %s" % set_cardinality("new")
+                        publish_count("new")
                     else:
                         add_incorrect(word)
-                        print "Number of incorrect words: %s %s" %(set_cardinality("incorrect"),
-                                                                   common_mistake()[0])
-
+                        publish_count("incorrect")
+                        publish_mistake()
     def on_error(self,status_code,data):
         print "Error:%s" % status_code
 

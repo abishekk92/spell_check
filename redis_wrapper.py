@@ -37,3 +37,12 @@ def remove_from_incorrect(word):
 
 def common_mistake():
     return redis.zrange("incorrect",-1,-1)
+
+def publish_count(_set):
+    count = set_cardinality(_set)
+    channel = "%s_count" % _set
+    redis.publish(channel,count)
+
+def publish_mistake():
+    mistake  = common_mistake()[0]
+    redis.publish("common_mistake",mistake)
