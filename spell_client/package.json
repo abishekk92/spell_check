@@ -1,0 +1,25 @@
+{
+  "name": "spell_client",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.4.3",
+    "jade": "*",
+    "stylus": "*"
+  },
+  "description": "A client interface to a real time spell checker",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "github.com/abishekk92/spell_check"
+  },
+  "author": "Abishek Bhat <bhat.abishek@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abishekk92/spell_check/issues"
+  }
+}
