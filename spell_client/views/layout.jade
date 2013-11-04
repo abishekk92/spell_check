@@ -4,7 +4,12 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src="/socket.io/socket.io.js")
-
+    script.
+        var timeout = setTimeout("location.reload(true);",5000);
+          function resetTimeout() {
+            clearTimeout(timeout);
+            timeout = setTimeout("location.reload(true);",5000);
+          }
     script.
         var foo = data; 
         socket = io.connect('http://localhost');

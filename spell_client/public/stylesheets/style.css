@@ -1,7 +1,23 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 a {
   color: #00b7ff;
+}
+i {
+  text-transform: capitalize;
+}
+.title {
+  font-size: 25px;
+  text-align: center;
+}
+p#title {
+  position: relative;
+  left: 15px;
+}
+div#dashboard {
+  position: relative;
+  top: 8em;
+  text-align: center;
 }
