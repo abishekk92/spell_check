@@ -5,10 +5,23 @@
 
 var express = require('express');
 var routes = require('./routes');
-var http = require('http');
 var path = require('path');
+var app = express(),
+    server = require('http').createServer(app),
+    io = require('socket.io').listen(server);
 
-var app = express();
+var redis = require('redis'),
+    redis_client = redis.createClient(); 
+
+
+redis_client.on("pmessage", function(pattern,count,message){
+    io.sockets.on('connection',function(socket){
+        console.log({channel: count,
+                 count: message});
+        socket.emit('count',{channel: count,
+                          count: message});
+        });
+});
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -24,11 +37,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+    app.use(express.errorHandler());
 }
 
 app.get('/', routes.index);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+redis_client.psubscribe("*_count");
+server.listen(app.get('port'), function(){
+    console.log('Express server listening on port ' + app.get('port'));
 });

@@ -24,9 +24,7 @@ class Streamer(TwythonStreamer):
                         publish_count("incorrect")
                         publish_mistake()
     def on_error(self,status_code,data):
-        print "Error:%s" % status_code
-
-
+        pass
 
 stream = Streamer(ENV("twitter_cons_key"), ENV("twitter_cons_secret"),
         ENV("twitter_auth_token"), ENV("twitter_auth_secret"))
