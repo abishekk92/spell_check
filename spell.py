@@ -3,6 +3,7 @@ from os import getenv as ENV
 from utils import *
 from redis_wrapper import *
 import dictionary
+
 class Streamer(TwythonStreamer):
 
     def on_success(self, data):

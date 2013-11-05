@@ -11,7 +11,8 @@
     "stylus": "*",
     "redis" : "0.9.0",
     "hiredis" : "0.1.15",
-    "socket.io": "*"
+    "socket.io": "*",
+    "socket.io-client": "*"}
   },
   "description": "A client interface to a real time spell checker",
   "main": "app.js",
