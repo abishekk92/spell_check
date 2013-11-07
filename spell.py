@@ -1,5 +1,5 @@
 from twython import TwythonStreamer
-from os import getenv as ENV
+from ConfigParser import ConfigParser
 from utils import *
 from redis_wrapper import *
 import dictionary
@@ -27,7 +27,11 @@ class Streamer(TwythonStreamer):
     def on_error(self,status_code,data):
         pass
 
-stream = Streamer(ENV("twitter_cons_key"), ENV("twitter_cons_secret"),
-        ENV("twitter_auth_token"), ENV("twitter_auth_secret"))
+
+config = ConfigParser()
+config.read("./conf/app.config")
+config = dict(config.items(config.sections()[0]))
+stream = Streamer(config["twitter_cons_key"], config["twitter_cons_secret"],
+        config["twitter_auth_token"], config["twitter_auth_secret"])
 
 stream.statuses.filter(track='#help',language='en')
