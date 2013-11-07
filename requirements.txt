@@ -1,7 +1,11 @@
+Fuzzy==1.0
 argparse==1.2.1
 distribute==0.6.34
+fuzzywuzzy==0.2
+ipython==1.1.0
 oauthlib==0.5.1
 pyreBloom==1.0.1
+redis==2.8.0
 requests==1.2.3
 requests-oauthlib==0.3.2
 twython==3.0.0
