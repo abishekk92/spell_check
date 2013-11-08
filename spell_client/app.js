@@ -14,13 +14,16 @@ var redis = require('redis'),
     redis_client = redis.createClient(); 
 
 
+
+io.sockets.on('connection', function(socket){
+    socket.on('subscribe', function(data){
+    socket.join(data.channel);
+});
+});
+
 redis_client.on("pmessage", function(pattern,count,message){
-    io.sockets.on('connection',function(socket){
-        console.log({channel: count,
-                 count: message});
-        socket.emit('count',{channel: count,
-                          count: message});
-        });
+    var data = {channel: count, count: message}
+    io.sockets.in("count").emit('message', data);
 });
 
 // all environments

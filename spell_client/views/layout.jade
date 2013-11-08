@@ -7,7 +7,10 @@ html
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
     script.
         socket = io.connect('http://localhost');
-        socket.on('count', function(data){
+         socket.on('connect', function(data){
+            socket.emit('subscribe', {channel:'count'});
+            });
+        socket.on('message', function(data){
             $("p#"+data.channel).text(data.count);
             });
   body
