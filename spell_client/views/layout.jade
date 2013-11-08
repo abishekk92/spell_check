@@ -4,17 +4,11 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src="/socket.io/socket.io.js")
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
     script.
-        var timeout = setTimeout("location.reload(true);",5000);
-          function resetTimeout() {
-            clearTimeout(timeout);
-            timeout = setTimeout("location.reload(true);",5000);
-          }
-    script.
-        var foo = data; 
         socket = io.connect('http://localhost');
         socket.on('count', function(data){
-            document.writeln("Hey");
+            $("p#"+data.channel).text(data.count);
             });
   body
     block content
