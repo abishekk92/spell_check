@@ -37,8 +37,4 @@ cd spell_client
 
 nvm use v0.10.7
 
-npm install 
-
-mkdir /var/log/spell && mkdir /var/log/spell/spell_client
-
-npm start >> /var/log/spell/spell_client.log & 
+npm install || mkdir -p /var/log/spell && mkdir -p /var/log/spell/spell_client

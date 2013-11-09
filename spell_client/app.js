@@ -22,7 +22,7 @@ io.sockets.on('connection', function(socket){
 });
 
 redis_client.on("pmessage", function(pattern,count,message){
-    var data = {channel: count, count: message}
+    var data = {channel: count, message: message}
     io.sockets.in("count").emit('message', data);
 });
 
@@ -46,6 +46,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 
 redis_client.psubscribe("*_count");
+redis_client.subscribe("most_incorrect");
 server.listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
 });

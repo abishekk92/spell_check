@@ -16,4 +16,5 @@ Vagrant.configure("2") do |config|
     #Install and start all the process
     #TODO: Break these into individual tasks for better readibility, abstraction is bad here? 
     config.vm.provision :shell, :path => "install.sh"
+    config.vm.provision :shell, :path => "start.sh"
 end

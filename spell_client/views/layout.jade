@@ -11,7 +11,7 @@ html
             socket.emit('subscribe', {channel:'count'});
             });
         socket.on('message', function(data){
-            $("p#"+data.channel).text(data.count);
+            $("p#"+data.channel+'> i').text(data.message);
             });
   body
     block content
