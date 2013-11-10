@@ -31,7 +31,7 @@ cd pyreBloom && python setup.py install
 
 cd /vagrant
 
-python spell.py &
+nohup python spell.py &
 
 cd spell_client 
 
